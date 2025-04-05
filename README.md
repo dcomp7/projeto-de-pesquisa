@@ -5,3 +5,4 @@ Projeto de pesquisa (iniciação científica): Aspectos Técnico-Operacionais e 
 ## Conteúdo
 
 *   [Projeto.pdf](Projeto.pdf): Versão PDF do projeto.
+*   Licença: CC BY 4.0
