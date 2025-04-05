@@ -1,0 +1,280 @@
+\documentclass[12pt, a4paper, oneside, openright, chapter=TITLE]{abntex2}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[alf, abnt-etal-text=it]{abntex2cite}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{float}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.0cm, itemsep=0.5em} 
+\renewcommand{\thesection}{\arabic{section}}   % Remove o zero prefixado das seções
+\setcounter{secnumdepth}{3}
+
+% =============================================
+% METADADOS DO PROJETO
+% =============================================
+\title{
+    Aspectos Técnico-Operacionais e Regulatórios da Emissão de um Criptoativo para Representar Direitos a Dividendos em Startups Seed e Pre-Seed no Brasil \\
+    \vspace{0.5cm}
+}
+\author{Leonardo de Souza Borges \\ Gabriel Falcão}
+\local{Campinas}
+\data{2025}
+\orientador[Orientadora:]{Profª. Drª. Karem Daiane Marcomini}
+\instituicao{
+    UNIVERSIDADE PAULISTA - UNIP \\
+    Vice-Reitoria de Pós-Graduação e Pesquisa \\
+    Programa de Iniciação Científica
+}
+\setlength{\parindent}{1.25cm}
+
+\makeatletter
+\renewcommand{\imprimirfolhaderosto}{%
+    \begin{titlepage}
+        \begin{center}
+            % Instituição no topo sem negrito
+            {\ABNTEXchapterfont\large\imprimirinstituicao\par}
+            \vspace{4cm}
+
+            % Título do jeito que está
+            {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo\par}
+            \vspace{3cm}
+        \end{center}
+
+        % Parágrafo alinhado à direita com largura de 40%
+        \begin{flushright}
+            \begin{minipage}{0.5\textwidth}
+                \small
+                Projeto de Pesquisa apresentado ao Curso de Ciência da Computação do Instituto de Ciências Exatas e Tecnologia da Universidade Paulista, como parte dos critérios de avaliação do processo seletivo de Iniciação Científica.
+                \\
+                \imprimirorientadorRotulo
+                \\
+                ~\imprimirorientador
+            \end{minipage}
+        \end{flushright}
+
+        \vspace{2cm}
+
+        % Autores centralizados
+        \begin{center}
+            {\ABNTEXchapterfont\large\imprimirautor\par}
+            \vspace{2cm}
+
+            % Local e data
+            {\ABNTEXchapterfont\large\imprimirlocal\par}
+            {\ABNTEXchapterfont\large\imprimirdata\par}
+        \end{center}
+    \end{titlepage}
+}
+\makeatother
+
+% Configuração para numeração no canto inferior direito
+\makeatletter
+\renewcommand{\ps@plain}{%
+    \renewcommand{\@oddfoot}{\hfill\thepage} % Número da página no canto inferior direito
+    \renewcommand{\@evenfoot}{\hfill\thepage} % Número da página no canto inferior direito
+    \renewcommand{\@oddhead}{} % Remove cabeçalho
+    \renewcommand{\@evenhead}{} % Remove cabeçalho
+}
+\makeatother
+
+% =============================================
+% DOCUMENTO
+\begin{document}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+% CAPA
+%\imprimircapa
+
+% FOLHA DE ROSTO
+\imprimirfolhaderosto
+%\include{snippets/undercover}
+
+\clearpage
+% RESUMO
+\begin{resumo}
+\vspace{1cm}
+A inovação tecnológica demanda novas formas de financiamento que atendam às necessidades específicas de empresas emergentes, especialmente em estágios iniciais. Neste contexto, o presente projeto investiga a viabilidade técnica, regulatória e operacional da utilização de criptoativos, especificamente \textit{security tokens}, para representar direitos a dividendos em \textit{startups} brasileiras em estágio \textit{seed} e \textit{pre-seed}. A pesquisa contempla aspectos tecnológicos, como o uso de \textit{blockchain} e contratos inteligentes; regulatórios, considerando as normas da CVM e o Marco Legal das Criptomoedas; e econômicos, com foco na distribuição automatizada de dividendos. Metodologicamente, o estudo combina revisão bibliográfica, análise comparativa de plataformas como Ethereum, Binance Smart Chain e Polygon, além do desenvolvimento de protótipos funcionais, incluindo um \textit{token} experimental e um sistema de distribuição automatizada. Os resultados esperados incluem a criação de modelos jurídicos compatíveis com a legislação vigente, soluções tecnológicas seguras e acessíveis, e a publicação de artefatos no \textit{GitHub} sob licenças abertas, contribuindo para um ecossistema mais dinâmico e inovador para \textit{startups} no Brasil.
+
+
+\textbf{Palavras-chave}: Financiamento de \textit{Startups}, Criptoativos, Dividendos, \textit{Blockchain}, Regulação Financeira, \textit{Security Tokens}.
+\end{resumo}
+
+% SUMÁRIO
+\clearpage
+\pdfbookmark[0]{\contentsname}{toc}
+\begin{samepage}
+\begingroup
+\setlength{\parskip}{0pt}
+\tableofcontents*
+\endgroup
+\end{samepage}
+\clearpage
+
+% Reinicia a numeração das páginas em arábico após o sumário
+
+\pagestyle{plain} % Define o estilo de página para exibir a numeração
+
+% =============================================
+% SEÇÕES PRINCIPAIS
+\section{Introdução}
+\subsection{Contextualização e Relevância}
+\hspace*{\parindent} A inovação impulsiona o desenvolvimento econômico, mas seu progresso exige um elemento essencial: \textbf{financiamento}. Desde \citeonline{schumpeter1912} reconhece-se que, sem acesso ao crédito e a sistemas eficazes de financiamento, inovações dificilmente se estabelecem.
+
+Desde a apresentação do Bitcoin e do conceito de \textit{blockchain} por \citeonline{nakamoto2008}, o setor financeiro global tem passado por uma intensa onda de transformação e inovação \cite{kondova2019}. Para além do conceito de criptomoedas, surgiram outras formas de aplicações da tecnologia \textit{blockchain}, tais como os \textit{security tokens}\footnote{Os \textit{security tokens} são ativos digitais que representam direitos sobre ativos reais, como ações, participação societária ou recebíveis. Importante notar que o termo anglófono "\textit{security}" é polissêmico e aqui refere-se a títulos mobiliários (como ações e debêntures), e não ao conceito de segurança.} que representam direitos sobre ativos reais, como ações, direitos a dividendos, imóveis e até mesmo obras de arte. Outra aplicação relevante da tecnologia \textit{blockchain} foi introduzida por \citeonline{buterin2014}, com o conceito de \textit{smart contracts}, que permite a execução automática de cláusulas contratuais por meio de código.
+
+Esses contratos são programas computacionais armazenados e executados em redes \textit{blockchain} que automaticamente executam, verificam e fazem cumprir cláusulas contratuais quando condições pré-programadas são satisfeitas, garantindo imutabilidade, transparência e eliminando a necessidade de intermediários.
+
+Os \textit{smart contracts} desempenham um papel fundamental na criação e gestão de \textit{security tokens}, ativos digitais que representam direitos sobre ações, dívidas ou outros ativos reais. Ao serem programados para seguir regras regulatórias e de negócio de forma automática, esses contratos podem garantir conformidade, eficiência e segurança no mercado financeiro digital.
+
+Estudo recente da consultoria \citeonline{mckinsey2024} projeta que, até 2030, o mercado de ativos financeiros tokenizados (excluindo criptomoedas) poderá atingir aproximadamente US\$ 2 trilhões. Já a consultoria \citeonline{bcg2024} apresenta projeções ainda mais otimistas, estimando um valor na casa dos US\$ 16 trilhões para o mesmo período. Independentemente das estimativas, esses números evidenciam que a tecnologia \textit{blockchain} já se consolidou como uma realidade relevante, sendo capaz de processar trilhões de dólares anualmente e atraindo a atenção de investidores e reguladores em todo o mundo.
+
+Ao contrário do que ocorre com \textit{startups} em países mais desenvolvidos, o Brasil ainda não possui uma cultura de capital de risco suficientemente consolidada \cite{lazzarini2018}. Isso faz com que as empresas iniciantes da economia criativa brasileira enfrentem, além de um cenário fiscal e burocrático desafiador, grandes barreiras no acesso ao capital, dificultando seu crescimento e competitividade no mercado.
+
+Nesse sentido, a Comissão de Valores Mobiliários (CVM) tem se mostrado aberta tanto a discutir a regulamentação de criptoativos e \textit{security tokens} (CVM nº 40/2022) quanto a flexibilizar as regras de captação de recursos para \textit{startups} regulando o conceito de \textit{crowdfunding} (CVM nº 88/2022). Nessa modalidade de financiamento, a empresa pode captar recursos de investidores sem a necessidade de registro formal na CVM, desde que a captação respeite determinadas regras, como limites de transações, e seja realizada por uma plataforma autorizada e regulada pelo órgão. Dessa forma, o processo pode ocorrer de maneira segura e estruturada. Algumas dessas plataformas já adotam a tecnologia \textit{blockchain} \cite{ruffoni2020}, proporcionando um diferencial tecnológico em relação às demais.
+
+Essas plataformas por intermediarem a relação entre investidores e \textit{startups} e estarem sujeitas à regulação da CVM, exigem processos rigorosos de \textit{due diligence}. Em geral, concentram-se em \textit{startups} que já se encontram em fase operacional ou de tração. Em outras palavras, focam em empresas que possuem um modelo de negócios validado, apresentam números auditáveis e buscam acelerar seu crescimento. Por exemplo, uma plataforma autorizada, a \citeonline{kria2025} menciona em seu \textit{website}: \textit{“Investimos em negócios operacionais, com tese validada e faturamento entre R\$ 1 milhão a R\$ 40 milhões por ano”}.
+
+Embora haja variações na nomenclatura utilizada por diferentes autores, é comum considerar que as \textit{startups} evoluem por diversos estágios, cada um com desafios e características específicas \cite{sebrae2023}: ideação (\textit{pre-seed}), validação (\textit{seed}), operação (\textit{early stage}), tração (\textit{grow stage}) e \textit{scale-up} (\textit{expansion stage}).
+
+Como nenhum tubarão nasce grande, nenhuma \textit{startup} nasce sem passar pelo estágio de   \textit{pre-seed}. Esse estágio primordial é caracterizado pela construção da proposta de valor e pela busca de validação do modelo de negócio, desenvolvimento do produto mínimo viável (\textit{MVP}, do inglês \textit{Minimum Viable Product}) e a construção de um time coeso. Há uma grande dificuldade de acessar capital nesse estágio \cite{maringa2024}. Geralmente, o financiamento vem de recursos próprios, amigos e familiares — o que é conhecido como "\textit{love money}" — ou de "investidores anjo", que são mais raros nesse estágio devido ao alto risco e à preferência por investir em modelos já validados.
+
+Diante desse desafio, soluções alternativas de captação e organização societária tornam-se fundamentais. A tokenização dos direitos a dividendos, por meio de \textit{security tokens}, surge como uma possibilidade promissora nesse cenário. Esses ativos digitais podem representar frações de direitos econômicos futuros e serem distribuídos de maneira proporcional entre sócios, colaboradores ou investidores, com base na contribuição individual ao negócio. Com isso, mesmo sem capital expressivo no início, uma \textit{startup} pode estruturar um modelo de participação mais justo e eficiente.
+
+Por exemplo, suponha que três engenheiros, com capital inicial limitado, decidam criar uma \textit{startup}. Eles estipulam que o valor do negócio deve ser, no mínimo, 1 milhão de reais, e para se organizarem decidem realizar a emissão de 1 milhão de unidades de criptoativo, com cada token representando o valor nominal de 1 real, totalizando 1 milhão de reais no total. Inicialmente, todos os \textit{tokens} ficam em posse da empresa, mas conforme os fundadores trabalham ou aportam capital, eles recebem uma quantidade de \textit{tokens} proporcional ao valor que cada um agregou ao negócio. Essa abordagem permite não somente uma alternativa para atrair financiamento descentralizado, mas também uma forma de organização centrada no valor efetivamente depositado no negócio.
+
+Enquanto a CVM regula fortemente a \textbf{oferta pública} de valores mobiliários, a \textbf{oferta restrita} (Resoluções CVM nº 160/2022 e nº 88/2022), apenas para colaboradores e investidores qualificados, tende a ter uma regulação mais flexível. Se isso for verdade — e esta é uma das perguntas que a pesquisa pretende responder —, e um sistema de distribuição de dividendos automatizado for implementado, a \textit{startup} poderia captar e mobilizar recursos humanos e financeiros de forma mais eficiente e descentralizada. Por exemplo, a \textit{startup} poderia vender seus criptoativos a pessoas selecionadas de forma muito mais prática, sem a necessidade de complexos processos tradicionais de captação de recursos.
+
+Outro exemplo seria a utilização dos \textit{security tokens} como um incentivo para atrair colaboradores ou fornecedores especializados, tais como especialistas em \textit{Cloud} ou Segurança da Informação. Os \textit{tokens} poderiam ser usados como uma ferramenta de atração para esses talentos, oferecendo uma parte dos direitos a dividendos como parte da compensação ou como incentivo para o engajamento de longo prazo.
+
+Nesse contexto, o presente projeto tem como objetivo investigar a viabilidade tecnológica, operacional e regulatória da utilização de \textit{security tokens} para representar direitos a dividendos em \textit{startups} brasileiras em estágio \textit{seed} e \textit{pre-seed}. A pesquisa contempla o desenvolvimento de protótipos funcionais, análise jurídica conforme normas da CVM e o Marco Legal das Criptomoedas, bem como o uso de plataformas baseadas em \textit{blockchain}. Todos os artefatos produzidos — textos, modelos e códigos — serão publicados sob licenças abertas no \textit{GitHub}, promovendo um ecossistema mais acessível e inovador para novos empreendimentos no país, promovendo soluções que possam impactar positivamente o ambiente de negócios.
+
+\subsection{Revisão da Literatura}
+
+\hspace*{\parindent} A revisão da literatura é essencial para fornecer os fundamentos teóricos que sustentam o desenvolvimento deste projeto, abordando as tecnologias e regulações envolvidas na tokenização de direitos a dividendos para \textit{startups}. A base tecnológica do projeto é construída em torno de três pilares principais: \textit{blockchain}, contratos inteligentes e tokenização de ativos.
+
+\citeonline{nakamoto2008} estabeleceu as bases da tecnologia \textit{blockchain} com o Bitcoin, criando um sistema descentralizado de registro imutável. \citeonline{buterin2014} expandiu esse conceito ao introduzir a plataforma Ethereum, que possibilitou a criação de \textit{smart contracts} (contratos inteligentes) - programas autoexecutáveis que funcionam conforme condições predefinidas sem necessidade de intermediários. A evolução dessas tecnologias permitiu o desenvolvimento de protocolos específicos como ERC-20 e ERC-1404 para \textit{tokens} fungíveis e com restrições regulatórias, respectivamente.
+
+O ecossistema \textit{blockchain} diversificou-se com alternativas como \textit{Binance Smart Chain} e \textit{Polygon}, que oferecem diferentes compromissos entre descentralização, custos transacionais e velocidade. Estudos recentes \cite{wang2023smart, kaal2022defi, beck2021real} analisam aspectos críticos para a tokenização de direitos a dividendos, como mecanismos de distribuição automática de receitas, governança digital e interoperabilidade entre diferentes \textit{blockchains}. Quanto à segurança, estudos como os de \citeonline{atzei2017} documentam vulnerabilidades recorrentes em contratos inteligentes, destacando a importância de práticas robustas de desenvolvimento. Nesse contexto, bibliotecas como a da \citeonline{openzeppelin2023} oferecem padrões consolidados de implementação segura, contribuindo para a mitigação de riscos em sistemas financeiros descentralizados.
+
+A regulamentação de ativos digitais é um campo em constante evolução no Brasil e no mundo. O cenário regulatório brasileiro está se consolidando com diversos marcos importantes: a Resolução CVM nº 160/2022, que dispõe sobre ofertas públicas de distribuição de valores mobiliários; a Resolução CVM nº 88/2022, que estabelece regras para plataformas eletrônicas de investimento coletivo (\textit{crowdfunding}); o Parecer de Orientação nº 40/2022, que fornece diretrizes sobre a classificação de criptoativos como valores mobiliários; a Resolução CVM nº 175, que regulamenta as ofertas públicas de \textit{tokens}; e a Lei 14.478/2022 (Marco Legal das Criptomoedas), que estabelece diretrizes para o mercado de ativos virtuais e define responsabilidades para prestadores de serviços. 
+
+A literatura jurídica analisa a conformidade desses ativos com as normas vigentes \cite{dias2020} e os desafios legais associados à sua implementação \cite{barreto2022}. Estudos comparativos com regulamentações internacionais, como o \textit{Howey Test} nos EUA e o \textit{Payment Services Act} (PSA) de 2019 em Singapura, fornecem uma visão abrangente das melhores práticas e desafios regulatórios.
+
+\clearpage
+% =============================================
+\section{Objetivos}
+\subsection{Objetivo Geral}
+
+\hspace*{\parindent} Investigar a viabilidade técnico-operacional e regulatória para a implantação de criptoativos como instrumentos de representação de direitos a dividendos em \textit{startups} brasileiras em estágio \textit{seed} e \textit{pre-seed}, analisando aspectos tecnológicos (arquitetura de \textit{smart contracts}, segurança, custos etc.), regulatórios (conformidade com a CVM e com a legislação pertinente) e econômicos (soluções para distribuição automatizada de dividendos).
+
+\subsection{Objetivos Específicos}
+\begin{itemize}
+    \item Emitir um \textit{security token} experimental para representar os direitos a dividendos de uma empresa, utilizando tecnologias de \textit{blockchain} e contratos inteligentes.
+
+    \item Desenvolver um protótipo de \textit{software} (\textit{on-chain} ou \textit{off-chain}) que permita a distribuição automatizada de dividendos para os detentores de \textit{tokens}, com base em condições predefinidas.
+    
+    \item Analisar o panorama regulatório brasileiro e internacional, avaliando a conformidade da implementação de \textit{security tokens} com as regulamentações existentes e os desafios legais envolvidos.
+    
+    \item Publicar artefatos da pesquisa no \textit{GitHub}, disponibilizando-os sob licença \textit{GPL v3} e \textit{Creative Commons}, com o objetivo de contribuir com a comunidade \textit{software} livre e potencializar o resultado da pesquisa.
+\end{itemize}
+
+\clearpage
+% =============================================
+\section{Materiais e Métodos}
+\subsection{Processo de Pesquisa}
+\hspace*{\parindent} O percurso metodológico desta pesquisa iniciará com uma revisão conceitual e teórica aprofundada das tecnologias envolvidas, que estabelecerá as bases para o desenvolvimento do projeto. Em seguida, será realizada uma análise do panorama regulatório brasileiro e internacional,  com o objetivo de identificar os limites legais e as possibilidades práticas relacionadas à tokenização de ativos e à distribuição automatizada de dividendos.
+
+A partir dos fundamentos teóricos e regulatórios estabelecidos, a pesquisa avançará para a etapa prática, que consiste na emissão de um criptoativo experimental. Para isso, será realizada uma análise comparativa entre três das principais plataformas de emissão de criptoativos com suporte a contratos inteligentes — Ethereum, \textit{Binance Smart Chain} e \textit{Polygon} — considerando critérios como escalabilidade, custos operacionais e aderência aos objetivos do projeto. Paralelamente, serão examinados os protocolos de segurança disponíveis, com foco na integridade e confiabilidade da solução proposta.
+
+Com base nos resultados destas análises preliminares, será implementado um criptoativo experimental com 1 milhão de tokens, representando os direitos a dividendos de uma empresa hipotética. A implementação será seguida por uma análise aprofundada das questões técnicas identificadas durante o desenvolvimento, bem como das implicações regulatórias à luz da legislação vigente.
+
+Na etapa final, será desenvolvido um protótipo funcional para demonstrar a viabilidade da distribuição automatizada e proporcional de dividendos aos detentores de \textit{tokens}. Todos os artefatos produzidos durante a pesquisa são publicados no \textit{GitHub} sob licença \textit{GPL v3} ou \textit{Creative Commons}, promovendo a transparência e incentivando futuras contribuições à linha de pesquisa.
+
+\subsection{Emissão do Criptoativo Experimental}
+
+\hspace*{\parindent} Após a conclusão das etapas iniciais do processo de pesquisa, será realizada a escolha da plataforma de \textit{blockchain} mais adequada para a emissão do criptoativo, levando em consideração diversos critérios, tais como custo financeiro, segurança, facilidade de implantação e manutenção, e compatibilidade com os objetivos do projeto. A escolha será fundamentada na comparação \textit{a priori} entre três plataformas: Ethereum, \textit{Binance Smart Chain} (BSC) e \textit{Polygon}.
+
+Para cada plataforma, serão utilizadas as seguintes ferramentas e tecnologias:
+
+\begin{itemize}
+    \item \textbf{Ethereum}: Utilização da linguagem de programação \textit{Solidity} v0.8.25+ para o desenvolvimento de contratos inteligentes, juntamente com as bibliotecas \textit{OpenZeppelin}, que garantem padrões de segurança em contratos inteligentes.
+    \item \textbf{\textit{Binance Smart Chain} (BSC)}: Investigação da documentação oficial para identificar as melhores práticas e ferramentas específicas para a criação e implementação de contratos inteligentes na rede \textit{Binance}.
+    \item \textbf{\textit{Polygon}}: Análise da documentação oficial para entender as possibilidades e limitações da plataforma, além de sua compatibilidade com o escopo do projeto.
+\end{itemize}
+
+Essa análise e escolha das ferramentas serão complementadas por uma avaliação técnica detalhada de cada plataforma, considerando a segurança, escalabilidade e custos operacionais.
+
+\subsection{Protótipo do Sistema de Distribuição de Dividendos}
+
+\hspace*{\parindent} Após as considerações realizadas nos itens anteriores, será definido o método de distribuição de dividendos, que poderá ser automático (por meio de \textit{smart contracts}) ou semiautomático (via sistema \textit{web} protegido com login/senha). Também será determinada a forma de pagamento, como transferência bancária, \textit{stablecoin} ou outro método.
+
+Caso a abordagem adotada pela pesquisa opte por uma solução semiautomática, o procedimento técnico-metodológico consistirá na construção e gestão da distribuição de dividendos por meio de um sistema \textit{web}, protegido por autenticação (login e senha), que simulará transferências bancárias via Pix. Para isso, será utilizada uma \textit{stack} tecnológica composta por:
+
+\begin{itemize}
+    \item \textbf{Linguagens}: \textit{Node.js}, \textit{Python}, \textit{React}
+    \item \textbf{Ferramentas}: \textit{Docker}, \textit{PostgreSQL} e \textit{AdminJS}
+    \item \textbf{Metodologia de desenvolvimento}:
+    \begin{itemize}
+        \item Especificação funcional básica do protótipo
+        \item \textit{Wireframes} das interfaces (se aplicável)
+        \item Diagramação do banco de dados
+        \item Construção da aplicação
+        \item Publicação no \textit{GitHub}
+    \end{itemize}
+\end{itemize}
+
+
+\clearpage
+% =============================================
+\section{Resultados Esperados}
+\hspace*{\parindent} O desenvolvimento deste projeto visa alcançar resultados concretos e aplicáveis que possam demonstrar a viabilidade, eficácia e segurança da tokenização de direitos a dividendos para \textit{startups}. Os resultados esperados incluem os seguintes marcos:
+
+\begin{itemize}
+    \item \textbf{Conclusão da Análise de Viabilidade}:
+    Este resultado envolve a análise detalhada da viabilidade técnica, regulatória e financeira do projeto. A conclusão da análise de viabilidade fornecerá uma visão abrangente sobre a implementação da solução de tokenização, identificando potenciais desafios e oportunidades, e oferecendo uma base sólida para a continuidade do desenvolvimento e eventual adoção da tecnologia no mercado.
+
+    \item \textbf{Emissão de Criptoativo Experimental}:
+    Será desenvolvido um criptoativo experimental representando direitos a dividendos, com 1 milhão de tokens, implementado na plataforma \textit{blockchain} considerada mais adequada conforme os critérios definidos na análise comparativa. Esse criptoativo experimental terá como objetivo demonstrar, na prática, a viabilidade técnica da tokenização de direitos a dividendos, incorporando mecanismos de \textit{compliance} regulatório e segurança. O protótipo atuará como uma prova de conceito voltada para \textit{startups} em estágio \textit{seed} e \textit{pre-seed}, permitindo validar aspectos como escalabilidade, custo operacional e interoperabilidade com sistemas de distribuição de dividendos.
+
+    \item \textbf{Protótipo Funcional de Método de Distribuição Automática de Dividendos}:
+    A criação de um sistema funcional para a distribuição automática de dividendos será realizada por meio de um processo integrado que garantirá a execução automática de transferências de dividendos para os investidores. O método poderá ser integrado ao contrato inteligente ou intermediado por sistema protegido com usuário/senha e será testado para garantir que seja escalável, seguro e esteja em conformidade com os requisitos regulatórios estabelecidos.
+
+    \item \textbf{Modelos (\textit{templates}) de Artefatos Jurídicos Compatíveis com as Normas Regulatórias}:
+    Serão desenvolvidos com auxílio de inteligência artificial generativa modelos de documentos jurídicos essenciais, como contratos, termos de adesão e outros artefatos legais necessários para garantir que o projeto esteja em conformidade com as regulamentações existentes. Esses \textit{templates} serão elaborados com base na pesquisa realizada no que tange aos aspectos regulatórios.
+\end{itemize}
+
+\clearpage
+% =============================================
+\section{Cronograma}
+
+\hspace*{\parindent} Para garantir o cumprimento dos objetivos propostos e a execução eficiente de cada etapa do projeto, foi elaborado um cronograma detalhado das atividades previstas e os respectivos tempos de execução, conforme apresentado na Tabela 1.
+
+\begin{table}[H]
+\centering
+\caption{Cronograma de Atividades (Agosto/2025 - Janeiro/2026)}
+\label{tab:cronograma}
+\begin{tabularx}{\textwidth}{|l|*{6}{>{\centering\arraybackslash}X|}}
+\hline
+\textbf{Atividade} & \textbf{Ago} & \textbf{Set} & \textbf{Out} & \textbf{Nov} & \textbf{Dez} & \textbf{Jan} \\ \hline
+Revisão Bibliográfica & X & X & & & & \\ \hline
+Conclusão da análise & & X & & & & \\ \hline
+Criptoativo experimental & & X & X & & & \\ \hline
+Protótipo sistema de distribuição & & & X & X & & \\ \hline
+Publicação GitHub & & & & & X & X \\ \hline
+Redação final & & & & & X & X \\ \hline
+\end{tabularx}
+\end{table}
+
+% =============================================
+\bibliography{referencias}
+
+
+\end{document}
